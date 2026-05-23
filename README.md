@@ -91,7 +91,7 @@ Este workspace foi explicitamente projetado para integrar a inteligência artifi
 
 ### Rules (`.cursor/rules/`)
 As Rules definem **como o projeto funciona**. Elas garantem que a IA entenda a arquitetura, estrutura de pastas, stack tecnológica e convenções do projeto antes de gerar qualquer código.
-> 💡 **Benefício:** Você não precisa instruir a IA a usar "React Hook Form" ou "Atomic Design" nos seus prompts. Esse contexto é aplicado automaticamente.
+> **Benefício:** Você não precisa instruir a IA a usar "React Hook Form" ou "Atomic Design" nos seus prompts. Esse contexto é aplicado automaticamente.
 - *Exemplos:* `architecture-rules.mdc`, `frontend-rules.mdc`, `state-rules.mdc`
 
 ### Skills (`.cursor/skills/`)
@@ -106,7 +106,7 @@ Commands são **atalhos rápidos** usados para acionar fluxos de trabalho espec�
 ### Prompts de Feature Requests
 Como o "COMO" (arquitetura, bibliotecas, execução) já está definido pelas Rules e Skills, seus prompts devem focar puramente no **"O QUE"** (requisitos de negócio, regras de validação, payloads de API).
 
-> ⚠️ **Importante:** Os prompts devem ser escritos em inglês para reduzir a ambiguidade e prevenir alucinações da IA.
+> **Importante:** Os prompts devem ser escritos em inglês para reduzir a ambiguidade e prevenir alucinações da IA.
 
 #### Modelo de Prompt
 
