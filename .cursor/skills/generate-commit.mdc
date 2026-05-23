@@ -1,0 +1,204 @@
+# Skill: Generate Commit
+
+Goal:
+
+Analyze changes and generate organized commits following Conventional Commit standards.
+
+Purpose:
+
+Create readable, maintainable and logically grouped commit history.
+
+---
+
+Process
+
+1. Analyze changed files
+
+Identify:
+
+- new features
+- bug fixes
+- refactoring
+- tests
+- styles
+- configs
+- docs
+
+---
+
+2. Group changes by responsibility
+
+Separate modifications into isolated domains.
+
+Example:
+
+Detected:
+
+```txt
+src/services/user-service.ts
+
+src/hooks/use-user.ts
+
+src/components/user-form.tsx
+
+src/components/navbar.tsx
+```
+
+Generate:
+
+Group 1:
+
+Authentication feature
+
+Group 2:
+
+Navbar style update
+
+---
+
+3. Detect commit type
+
+Rules:
+
+New behavior:
+
+```txt
+feat
+```
+
+Bug correction:
+
+```txt
+fix
+```
+
+Refactoring:
+
+```txt
+refactor
+```
+
+Documentation:
+
+```txt
+docs
+```
+
+Style only:
+
+```txt
+style
+```
+
+Tests:
+
+```txt
+test
+```
+
+Performance:
+
+```txt
+perf
+```
+
+Dependencies:
+
+```txt
+deps
+```
+
+Configuration:
+
+```txt
+chore
+```
+
+---
+
+4. Detect scope
+
+Infer scope from:
+
+- feature name
+- domain
+- folder structure
+
+Examples:
+
+```txt
+auth
+users
+products
+dashboard
+api
+schema
+forms
+```
+
+---
+
+5. Generate commit plan
+
+Expected output:
+
+```txt
+Commit 1
+
+feat(auth): create login form
+
+Files:
+
+- login-form.tsx
+- use-auth.ts
+- auth-service.ts
+
+---------------------
+
+Commit 2
+
+style(auth): improve login spacing
+
+Files:
+
+- login-page.tsx
+
+---------------------
+
+Commit 3
+
+test(auth): add authentication tests
+
+Files:
+
+- auth.spec.ts
+```
+
+---
+
+6. Generate git commands
+
+Provide:
+
+```bash
+git add file1 file2
+
+git commit -m "feat(auth): create login form"
+```
+
+---
+
+Rules
+
+Never:
+
+- mix unrelated changes
+- create generic descriptions
+- create giant commits
+
+Always:
+
+- separate responsibilities
+- follow conventional commits
+- keep commit history readable
+- generate meaningful scopes

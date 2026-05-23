@@ -1,0 +1,261 @@
+---
+description: "Commit generation rules and commit organization standards"
+globs: **/*
+alwaysApply: true
+---
+
+# Commit Rules
+
+Follow commit rules strictly.
+
+---
+
+# Core Principles
+
+Commits exist to:
+
+- isolate changes
+- improve readability
+- simplify review
+- simplify rollback
+- maintain history quality
+
+Never create giant mixed commits.
+
+Avoid:
+
+```txt
+feat: update stuff
+```
+
+or:
+
+```txt
+fix: several changes
+```
+
+Each commit should represent one logical change.
+
+---
+
+# Commit Organization
+
+Separate commits by responsibility.
+
+Examples:
+
+Correct:
+
+```txt
+feat(auth): create authentication service
+
+feat(auth): create login form
+
+refactor(auth): extract authentication hook
+
+style(auth): adjust login page spacing
+```
+
+Avoid:
+
+```txt
+feat: authentication and styles and schema and fixes
+```
+
+---
+
+# Commit Group Rules
+
+Create separate commit groups for:
+
+Feature:
+
+```txt
+feat(scope):
+```
+
+Bug fixes:
+
+```txt
+fix(scope):
+```
+
+Refactoring:
+
+```txt
+refactor(scope):
+```
+
+Styles and UI:
+
+```txt
+style(scope):
+```
+
+Documentation:
+
+```txt
+docs(scope):
+```
+
+Tests:
+
+```txt
+test(scope):
+```
+
+Performance:
+
+```txt
+perf(scope):
+```
+
+Build:
+
+```txt
+build(scope):
+```
+
+Configuration:
+
+```txt
+chore(scope):
+```
+
+CI:
+
+```txt
+ci(scope):
+```
+
+Dependencies:
+
+```txt
+deps(scope):
+```
+
+---
+
+# Scope Rules
+
+Use scope representing domain or feature.
+
+Examples:
+
+```txt
+feat(auth):
+
+feat(users):
+
+feat(profile):
+
+feat(products):
+
+feat(api):
+```
+
+Avoid:
+
+```txt
+feat(code):
+
+feat(project):
+
+feat(update):
+```
+
+Scope must be meaningful.
+
+---
+
+# Commit Message Rules
+
+Structure:
+
+```txt
+type(scope): short description
+```
+
+Examples:
+
+```txt
+feat(profile): create profile edit form
+
+fix(auth): handle expired token
+
+refactor(users): extract user service
+
+style(dashboard): improve card spacing
+
+test(products): add product hook tests
+```
+
+Rules:
+
+- lowercase only
+- concise
+- imperative mood
+- max ~72 characters
+- no punctuation at end
+
+---
+
+# Multi-Commit Rule
+
+If changes affect multiple domains:
+
+Separate:
+
+Bad:
+
+```txt
+feat(auth): create login form and adjust navbar and update tests
+```
+
+Good:
+
+```txt
+feat(auth): create login form
+
+style(navbar): adjust navbar spacing
+
+test(auth): add login tests
+```
+
+---
+
+# Pull Request Rules
+
+PR should group related commits only.
+
+Example:
+
+```txt
+PR:
+
+Authentication Feature
+
+Commits:
+
+feat(auth): create auth service
+
+feat(auth): create login form
+
+feat(auth): create auth hooks
+
+test(auth): add auth tests
+```
+
+---
+
+# Final Rule
+
+Commit history should explain project evolution without opening files.
+
+A developer should understand:
+
+- what changed
+- why changed
+- affected area
+
+by reading commits only.
