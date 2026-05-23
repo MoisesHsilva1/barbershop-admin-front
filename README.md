@@ -1,715 +1,296 @@
+# Barbershop Admin
 
+> Um aplicativo moderno para agendamento e gerenciamento de barbearias.
 
-<body>
+## Visão Geral
 
-<h1>Cursor AI Workspace Guide</h1>
+**Qual problema resolve:** Otimiza as operações diárias de uma barbearia, gerenciando agendamentos, serviços e a agenda dos funcionários de forma eficiente.
 
-<p>
+**Objetivo principal:** Fornecer uma base arquitetural frontend robusta e de alta manutenibilidade, otimizando a experiência do desenvolvedor por meio de um fluxo de trabalho estruturado com auxílio de IA.
 
-Documentação completa para estruturar um workspace profissional no Cursor utilizando:
+**Usuários-alvo:** Donos de barbearias, administradores e recepcionistas.
 
-<strong>Rules</strong>, <strong>Skills</strong>, <strong>Commands</strong> e templates de Feature Request.
+**Por que o projeto existe:** Para consolidar uma arquitetura frontend avançada (React, TypeScript) com um fluxo de desenvolvimento moderno focado em IA (Cursor AI), garantindo código limpo, alta manutenibilidade e entrega rápida e consistente de features.
 
-Porque escrever o mesmo prompt gigante cinquenta vezes por semana é um ritual curioso da engenharia moderna.
+## Índice
 
-</p>
+- [Visão Geral](#visão-geral)
+- [Tecnologias](#tecnologias)
+- [Arquitetura do Projeto](#arquitetura-do-projeto)
+- [Fluxo de Desenvolvimento com IA](#fluxo-de-desenvolvimento-com-ia)
+- [Fluxo de Desenvolvimento](#fluxo-de-desenvolvimento)
+- [Pipeline de Deploy](#pipeline-de-deploy)
+- [Como Começar](#como-começar)
+- [Rodando os Testes](#rodando-os-testes)
+- [Melhores Práticas](#melhores-práticas)
+- [Como Contribuir](#como-contribuir)
 
-<div class="card">
+## Tecnologias
 
-  <h2>Objetivo</h2>
+### Frontend
+- **Framework:** React + Vite
+- **Linguagem:** TypeScript
+- **Roteamento:** React Router
 
-  <ul>
+### Gerenciamento de Estado
+- **Data Fetching e Estado do Servidor:** TanStack Query (React Query)
 
-    <li>Padronizar arquitetura</li>
+### Validação
+- **Formulários:** React Hook Form
+- **Validação de Schema:** Zod
 
-    <li>Reduzir prompts repetitivos</li>
+### UI (Interface de Usuário)
+- **Estilização:** CSS
+- **Componentes Primitivos:** Radix UI
+- **Componentes Base:** Shadcn UI
 
-    <li>Melhorar consistência do código</li>
+### API
+- **Cliente HTTP:** Axios
 
-    <li>Aumentar produtividade</li>
+### Testes
+- **Framework:** Vitest + Testing Library
 
-    <li>Evitar decisões aleatórias da IA</li>
+### Ferramentas de Desenvolvimento
+- **Assistente de IA:** Cursor AI
 
-    <li>Escalar desenvolvimento de features</li>
+## Arquitetura do Projeto
 
-  </ul>
+Este projeto segue estritamente uma adaptação da metodologia **Atomic Design**, enfatizando uma separação clara de responsabilidades entre regras de negócio, busca de dados (data fetching) e apresentação.
 
-</div>
+### Decisões Arquiteturais
+- **Separação de Responsabilidades:** A lógica de negócios é abstraída em custom hooks e services. Os componentes permanecem focados apenas em renderizar a interface e lidar com interações do usuário.
+- **Por que Atomic Design:** A adaptação do Atomic Design (Atoms, Molecules, Organisms, Templates, Pages) fornece um modelo mental claro para os desenvolvedores, incentiva o reuso de componentes e evita o inchaço da camada visual (UI).
+- **Escalabilidade:** Ao isolar as chamadas de API em uma camada de `services/` e gerenciar o estado global com TanStack Query, a aplicação pode crescer facilmente à medida que novas features são adicionadas.
 
-<h2>Estrutura Recomendada</h2>
+### Estrutura de Pastas
 
-<pre><code>.cursor/
+```text
+src/
+├── api/            # Configuração da instância do Axios e interceptors
+├── assets/         # Arquivos estáticos (imagens, fontes, ícones globais)
+├── components/     # Componentes de interface estruturados semanticamente
+│   ├── ui/         # Componentes base e primitivos (Atoms - ex: Button, Input)
+│   ├── molecules/  # Componentes compostos (ex: Form Fields, Service Cards)
+│   ├── organisms/  # Seções complexas e com estado (ex: Tables, Dialogs)
+│   ├── templates/  # Estruturas de layout das páginas
+│   └── pages/      # Camada de apresentação das rotas, conectando lógica e UI
+├── config/         # Configuração de variáveis de ambiente validadas
+├── constants/      # Constantes estáticas e opções de configuração
+├── hooks/          # Custom hooks (lógica de negócios e integrações com TanStack Query)
+├── lib/            # Configurações de bibliotecas de terceiros (ex: utils, query-client)
+├── routes/         # Configurações do React Router e definição de caminhos
+├── schema/         # Schemas de validação Zod para formulários e payloads de API
+├── services/       # Camada de abstração de API (isolando o frontend do backend)
+├── types/          # Definições de tipos e interfaces TypeScript globais
+└── utils/          # Funções utilitárias puras, formatadores e helpers
+```
 
-├── rules/
+## Fluxo de Desenvolvimento com IA
 
-│   ├── project-rules.mdc
+Este workspace foi explicitamente projetado para integrar a inteligência artificial perfeitamente ao processo de desenvolvimento. Em vez de depender de prompts longos e repetitivos, o contexto da IA é sistematicamente organizado em **Rules**, **Skills** e **Commands**.
 
-│   ├── frontend-rules.mdc
+### Rules (`.cursor/rules/`)
+As Rules definem **como o projeto funciona**. Elas garantem que a IA entenda a arquitetura, estrutura de pastas, stack tecnológica e convenções do projeto antes de gerar qualquer código.
+> 💡 **Benefício:** Você não precisa instruir a IA a usar "React Hook Form" ou "Atomic Design" nos seus prompts. Esse contexto é aplicado automaticamente.
+- *Exemplos:* `architecture-rules.mdc`, `frontend-rules.mdc`, `state-rules.mdc`
 
-│   ├── backend-rules.mdc
+### Skills (`.cursor/skills/`)
+As Skills atuam como **agentes especialistas**. Elas instruem a IA sobre **como executar uma tarefa específica** de acordo com os padrões estabelecidos do projeto.
+- *Exemplos:* `create-feature.mdc`, `create-schema.mdc`, `refactor.mdc`
+- *Uso:* `Generate commits for current changes with generate-commit skill`
 
-│   ├── testing-rules.mdc
+### Commands (`.cursor/commands/`)
+Commands são **atalhos rápidos** usados para acionar fluxos de trabalho específicos e especialistas, evitando a digitação repetitiva.
+- *Exemplos:* `/explain`
 
-│   ├── design-rules.mdc
+### Prompts de Feature Requests
+Como o "COMO" (arquitetura, bibliotecas, execução) já está definido pelas Rules e Skills, seus prompts devem focar puramente no **"O QUE"** (requisitos de negócio, regras de validação, payloads de API).
 
-│   ├── architecture-rules.mdc
+> ⚠️ **Importante:** Os prompts devem ser escritos em inglês para reduzir a ambiguidade e prevenir alucinações da IA.
 
-│   ├── state-rules.mdc
+#### Modelo de Prompt
 
-│   └── security-rules.mdc
+<details>
+<summary>Clique para ver o Modelo de Prompt de Feature Request (em Inglês)</summary>
 
-│
-
-├── skills/
-
-│   ├── [create-feature.md](http://create-feature.md)
-
-│   ├── [create-component.md](http://create-component.md)
-
-│   ├── [create-schema.md](http://create-schema.md)
-
-│   ├── [create-service.md](http://create-service.md)
-
-│   ├── [review-code.md](http://review-code.md)
-
-│   ├── [debug.md](http://debug.md)
-
-│   └── [adjust-design.md](http://adjust-design.md)
-
-│
-
-├── commands/
-
-│   ├── [feature.md](http://feature.md)
-
-│   ├── [schema.md](http://schema.md)
-
-│   ├── [service.md](http://service.md)
-
-│   ├── [review.md](http://review.md)
-
-│   ├── [optimize.md](http://optimize.md)
-
-│   └── [debug.md](http://debug.md)
-
-│
-
-└── README.html</code></pre>
-
-<h2>Conceitos Fundamentais</h2>
-
-<div class="card">
-
-  <h3>Rules</h3>
-
-  <p>
-
-  Rules definem como o projeto funciona.
-
-  </p>
-
-  <ul>
-
-    <li>Arquitetura</li>
-
-    <li>Estrutura de pastas</li>
-
-    <li>Stack</li>
-
-    <li>Padrões</li>
-
-    <li>Convenções</li>
-
-    <li>Design System</li>
-
-    <li>Naming</li>
-
-  </ul>
-
-  <div class="highlight">
-
-    Rules respondem:
-
-    <strong>"Como esse projeto funciona?"</strong>
-
-  </div>
-
-</div>
-
-<div class="card">
-
-  <h3>Skills</h3>
-
-  <p>
-
-  Skills funcionam como especialistas.
-
-  </p>
-
-  <ul>
-
-    <li>Criação de feature</li>
-
-    <li>Criação de schema</li>
-
-    <li>Review de código</li>
-
-    <li>Refatoração</li>
-
-    <li>Ajuste de design</li>
-
-  </ul>
-
-  <div class="highlight">
-
-    Skills respondem:
-
-    <strong>"Como essa tarefa deve ser executada?"</strong>
-
-  </div>
-
-</div>
-
-<div class="card">
-
-  <h3>Commands</h3>
-
-  <p>
-
-  Commands são atalhos rápidos.
-
-  </p>
-
-  <pre><code>/feature
-
-/schema
-
-/review
-
-/refactor
-
-/debug</code></pre>
-
-  <div class="highlight">
-
-    Commands respondem:
-
-    <strong>"Execute isso rapidamente."</strong>
-
-  </div>
-
-</div>
-
-<h2>Fluxo Completo</h2>
-
-<pre><code>Feature Request
-
-        ↓
-
-Rules carregam arquitetura
-
-        ↓
-
-Skills carregam especialização
-
-        ↓
-
-Commands aceleram execução
-
-        ↓
-
-Cursor gera implementação</code></pre>
-
-<h2>Como Usar Rules</h2>
-
-<p>
-
-Rules são aplicadas automaticamente.
-
-</p>
-
-<p>
-
-Você NÃO precisa escrever:
-
-</p>
-
-<pre><code>❌ Use React Hook Form
-
-❌ Use Zod
-
-❌ Use TanStack Query
-
-❌ Use Atomic Design
-
-❌ Use services
-
-❌ Use hooks</code></pre>
-
-<p>
-
-Porque isso já está definido nas Rules.
-
-</p>
-
-<div class="highlight">
-
-O prompt da feature deve explicar apenas:
-
-<strong>o que construir</strong>.
-
-</div>
-
-<h2>Como Usar Skills</h2>
-
-<p>
-
-Skills normalmente são ativadas automaticamente pelo contexto.
-
-</p>
-
-<h3>Exemplo</h3>
-
-<pre><code>Create validation for user form</code></pre>
-
-<p>
-
-O Cursor identifica:
-
-</p>
-
-<ul>
-
-  <li>schema</li>
-
-  <li>validation</li>
-
-  <li>forms</li>
-
-</ul>
-
-<p>
-
-Então tende a usar:
-
-</p>
-
-<pre><code>[create-schema.md](http://create-schema.md)</code></pre>
-
-<h3>Forçando uso de uma Skill</h3>
-
-<pre><code>Use adjust-design skill and improve this page</code></pre>
-
-<h2>Como Usar Commands</h2>
-
-<table>
-
-  <tr>
-
-    <th>Command</th>
-
-    <th>Objetivo</th>
-
-  </tr>
-
-  <tr>
-
-    <td><code>/feature</code></td>
-
-    <td>Criar feature completa</td>
-
-  </tr>
-
-  <tr>
-
-    <td><code>/schema</code></td>
-
-    <td>Criar schema Zod</td>
-
-  </tr>
-
-  <tr>
-
-    <td><code>/service</code></td>
-
-    <td>Criar camada de serviço</td>
-
-  </tr>
-
-  <tr>
-
-    <td><code>/review</code></td>
-
-    <td>Revisar implementação</td>
-
-  </tr>
-
-  <tr>
-
-    <td><code>/optimize</code></td>
-
-    <td>Otimizar performance</td>
-
-  </tr>
-
-  <tr>
-
-    <td><code>/debug</code></td>
-
-    <td>Investigar problema</td>
-
-  </tr>
-
-</table>
-
-<h2>Estrutura do Projeto</h2>
-
-<pre><code>src/
-
-├── components/
-
-│   ├── atoms/
-
-│   ├── molecules/
-
-│   ├── organisms/
-
-│   ├── templates/
-
-│   └── pages/
-
-│
-
-├── api/
-
-│   └── api.ts
-
-│
-
-├── hooks/
-
-├── services/
-
-├── stores/
-
-├── routes/
-
-├── schema/
-
-├── config/
-
-│   └── env.ts
-
-│
-
-├── types/
-
-├── utils/
-
-├── lib/
-
-└── assets/</code></pre>
-
-<h2>Environment Pattern</h2>
-
-<p>Evite:</p>
-
-<pre><code>import.meta.env.VITE_API_URL</code></pre>
-
-<p>Use:</p>
-
-<pre><code>const Environment = {
-
-  VITE_API_URL:
-
-  import.meta.env.VITE_API_URL
-
-};
-
-export default Environment;</code></pre>
-
-<h2>API Pattern</h2>
-
-<pre><code>import axios from 'axios';
-
-import Environment from '@/config/env';
-
-export const api = axios.create({
-
-  baseURL: Environment.VITE_API_URL,
-
-  headers: {
-
-    'Content-Type': 'application/json'
-
-  }
-
-});</code></pre>
-
-<h2>Schema Pattern</h2>
-
-<pre><code>schema/
-
-├── shared/
-
-│   ├── email-schema.ts
-
-│   └── phone-schema.ts
-
-│
-
-└── forms/
-
-    ├── login-form-schema.ts
-
-    └── profile-form-schema.ts</code></pre>
-
-<div class="highlight">
-
-Shared = reutilizável
-
-Forms = schema específico de formulário
-
-</div>
-
-<h2>Select Options Pattern</h2>
-
-<p>Evite listas inline:</p>
-
-<pre><code>&lt;Select
-
-  options={[
-
-    {
-
-      label:'Admin',
-
-      value:'admin'
-
-    }
-
-  ]}
-
-/&gt;</code></pre>
-
-<p>Use:</p>
-
-<pre><code>export const ROLE_OPTIONS = [
-
-  {
-
-    label:'Admin',
-
-    value:'admin'
-
-  }
-
-] as const;
-
-export function getRoleOptions(){
-
-  return ROLE_OPTIONS;
-
-}</code></pre>
-
-<h2>Template de Feature Request</h2>
-
-<pre><code># Feature Request
+```markdown
+# Feature Request
 
 ## Goal
-
-Implement feature:
-
-[feature objective]
-
----
+Implement the feature: [describe feature objective]
+*Example: Implement user authentication with login and logout functionality.*
 
 ## Business Context
-
-[problem being solved]
-
----
+Describe the problem being solved: [describe business need]
+*Example: Users need authentication to access protected routes and personalized data.*
 
 ## Functional Requirements
+List expected behaviors:
+- [requirement 1]
+- [requirement 2]
 
-- requirement
-
-- requirement
-
-- requirement
-
----
+*Example:*
+- *User can enter email and password*
+- *Validate fields before submission*
+- *Show loading state while submitting*
+- *Redirect after successful login*
 
 ## UI Requirements
+Describe UI expectations:
+- [ui requirement]
 
-- responsive
-
-- accessibility
-
-- mobile first
-
----
+*Example:*
+- *Use shadcn/ui*
+- *Mobile first & Responsive*
+- *Follow accessibility rules*
 
 ## Data Requirements
+**Request structure:**
+```typescript
+interface LoginRequest {
+  email: string;
+  password: string;
+}
+**Response structure:**
+interface LoginResponse {
+  token: string;
+  user: User;
+}
 
-Request:
-
-interface ExampleRequest{}
-
-Response:
-
-interface ExampleResponse{}
-
-API:
-
-GET /resource
-
----
+**API endpoints:**
+- `POST /auth/login`
+- `POST /auth/logout`
 
 ## Validation Rules
+- [rule 1]
 
-- validation
+*Example:*
+- *email is required and must be valid*
+- *password minimum 8 characters*
 
-- validation
-
----
+## State Requirements
+- **Local:** [if needed]
+- **Global:** [authenticated user state]
+- **Server:** [current user data]
 
 ## Edge Cases
-
-- network failure
-
-- loading state
-
-- invalid data
-
----
+Consider:
+- Network failures
+- Empty states
+- Unauthorized access
 
 ## Expected Deliverables
+Create everything necessary following project rules:
+- schemas, interfaces, services, hooks, components, routes, tests.
+Do not skip implementation details. Follow project architecture strictly.
+```
+</details>
 
-- schemas
+## Fluxo de Desenvolvimento
 
-- hooks
+A sequência a seguir ilustra o ciclo de vida de uma feature, desde a concepção até o deploy dentro deste workspace assistido por IA:
 
-- services
-
-- components
-
-- tests</code></pre>
-
-<h2>Exemplo Real</h2>
-
-<pre><code>/feature
-
-# Goal
-
-Implement service management
-
-# Functional Requirements
-
-- create service
-
-- edit service
-
-- delete service
-
-- list services
-
-# API
-
-GET /services
-
-POST /services
-
-PUT /services/:id
-
-DELETE /services/:id</code></pre>
-
-<h2>Design System</h2>
-
-<h3>Paleta</h3>
-
-<pre><code>Primary:
-
-#F4B400
-
-Neutral:
-
-#111827
-
-#1F2937
-
-#F9FAFB</code></pre>
-
-<h3>Tipografia</h3>
-
-<pre><code>Inter Tight
-
-Inter</code></pre>
-
-<h3>Princípios</h3>
-
-<ul>
-
-  <li>Minimalista</li>
-
-  <li>Muito espaço em branco</li>
-
-  <li>Contraste suave</li>
-
-  <li>Hierarquia clara</li>
-
-  <li>Poucos acentos de cor</li>
-
-</ul>
-
-<h2>Mental Model Final</h2>
-
-<pre><code>Prompt
-
+```
+ideia
 ↓
-
-O que construir
-
+Criação do Feature Request
 ↓
-
-Rules
-
+IA lê as Rules
 ↓
-
-Como o projeto funciona
-
+IA usa Skills
 ↓
-
-Skills
-
+Geração de Código
 ↓
-
-Como executar tarefas
-
+Revisão do Desenvolvedor
 ↓
-
-Commands
-
+Refatoração
 ↓
-
-Atalhos
-
+Testes
 ↓
+Geração de Commit
+↓
+Pull Request
+```
 
-Implementação consistente</code></pre>
 
-<div class="highlight">
+## Pipeline de Deploy
 
-Quanto melhor a separação entre Rules, Skills, Commands e Prompt,
+Nosso pipeline automatizado de CI/CD garante a qualidade e a confiabilidade do código antes que ele chegue à produção:
 
-mais previsível e consistente o Cursor fica.
 
-Sem isso, a IA começa a improvisar arquitetura.
+```
+Instalação dependências
+↓
+Build
+↓
+Tests
+↓
+Security
+↓
+Deploy
 
-E improvisação arquitetural costuma terminar com três pastas diferentes chamadas "utils". Fenômeno quase folclórico.
+```
 
-</div>
+## Como Começar
 
-</body>
+### Pré-requisitos
+- Node.js (v18+)
+- npm ou yarn
 
-</html>
+### Instalação
+
+1. **Clone o repositório:**
+   ```bash
+   git clone https://github.com/MoisesHsilva1/barbershop-admin-front.git
+   cd barbershop-admin
+   ```
+
+2. **Instale as dependências:**
+   ```bash
+   npm install
+   ```
+
+3. **Configuração de ambiente:**
+   Duplique o arquivo de exemplo e configure suas variáveis de ambiente locais.
+   ```bash
+   cp .env.example .env
+   ```
+
+4. **Inicie o servidor de desenvolvimento:**
+   ```bash
+   npm run dev
+   ```
+   A aplicação estará disponível em `http://localhost:5173`.
+
+## Rodando os Testes
+
+Para executar os testes unitários e de integração, rode:
+
+```bash
+npm run test
+```
+
+## Melhores Práticas
+
+Para manter a consistência em todo o código, siga estas diretrizes:
+
+- **Convenções de Nomenclatura:**
+  - Arquivos e Pastas: `kebab-case` (ex: `service-card.tsx`, `use-services.ts`).
+  - Componentes React: `PascalCase` (ex: `ServiceCard`).
+  - Variáveis/Funções: `camelCase` (ex: `fetchServices`).
+- **Regras de Arquitetura:** Respeite estritamente a estrutura do Atomic Design. Não coloque regras de negócio dentro de componentes de UI; use custom hooks.
+- **Responsabilidades dos Componentes:**
+  - `ui/`: Puramente visuais e altamente reutilizáveis. Sem lógica de domínio.
+  - `pages/`: Conectam a lógica de domínio (hooks) à camada de apresentação.
+- **Diretrizes de Uso da IA:** A IA é uma ferramenta, não um substituto para o julgamento de engenharia. Sempre revise o código gerado. Nunca realize um commit de código gerado por IA sem testes.
+- **Recomendações para Prompts:** Mantenha os prompts declarativos. Foque nas estruturas exatas de dados e nos requisitos de negócio, em vez de dizer à IA *como* escrever um componente.
+
+## Como Contribuir
+
+1. Faça um Fork do repositório.
+2. Crie uma branch de feature: `git checkout -b feature/minha-nova-feature`
+3. Faça o commit das suas mudanças (use a skill da IA `generate-commit` para mensagens padronizadas).
+4. Faça o push para a branch: `git push origin feature/minha-nova-feature`
+5. Abra um Pull Request detalhando suas alterações.
+
+---

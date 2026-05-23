@@ -1,3 +1,19 @@
----
-alwaysApply: true
----
+Description:
+
+Explain implementation.
+
+Instructions:
+
+Explain:
+
+- purpose
+- flow
+- architecture
+- responsibilities
+- improvements
+
+Keep concise.
+
+Expected:
+
+Clear explanation
