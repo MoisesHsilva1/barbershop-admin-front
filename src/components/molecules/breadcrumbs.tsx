@@ -23,7 +23,7 @@ export function Breadcrumbs({ items, className }: BreadcrumbsProps) {
           return (
             <li key={`${item.label}-${index}`} className="flex items-center gap-2">
               {index > 0 ? (
-                <span className="text-neutral-300" aria-hidden>
+                <span className="text-neutral-400" aria-hidden>
                   /
                 </span>
               ) : null}

@@ -24,7 +24,7 @@ export function AppSidebar({ className }: AppSidebarProps) {
         >
           <Scissors className="h-5 w-5" />
         </div>
-        <span className="text-lg font-semibold text-white">Nasck Hair</span>
+        <span className="text-lg font-semibold text-neutral-50">Nasck Hair</span>
       </div>
 
       <div className="px-4 py-4">
@@ -35,8 +35,8 @@ export function AppSidebar({ className }: AppSidebarProps) {
           />
           <Input
             type="search"
-            placeholder="Search"
-            aria-label="Search navigation"
+            placeholder="Buscar"
+            aria-label="Buscar na navegação"
             className="h-9 border-neutral-700 bg-neutral-800 pl-9 text-neutral-100 placeholder:text-neutral-500 focus-visible:ring-primary-400"
           />
         </div>
@@ -76,7 +76,7 @@ export function AppSidebar({ className }: AppSidebarProps) {
                           'flex items-center gap-3 rounded-xl px-3 py-2 text-sm font-medium transition-colors duration-200',
                           isActive
                             ? 'bg-primary-500 text-neutral-900'
-                            : 'text-neutral-300 hover:bg-neutral-800 hover:text-white',
+                            : 'text-neutral-300 hover:bg-neutral-800 hover:text-neutral-50',
                         )
                       }
                     >
@@ -94,14 +94,7 @@ export function AppSidebar({ className }: AppSidebarProps) {
       <div className="space-y-0.5 border-t border-neutral-800 px-3 py-4">
         <button
           type="button"
-          className="flex w-full items-center gap-3 rounded-xl px-3 py-2 text-sm text-neutral-300 transition-colors duration-200 hover:bg-neutral-800 hover:text-white"
-        >
-          <Headphones className="h-4 w-4 shrink-0" aria-hidden />
-          Help center
-        </button>
-        <button
-          type="button"
-          className="flex w-full items-center gap-3 rounded-xl px-3 py-2 text-sm text-destructive transition-colors duration-200 hover:bg-neutral-800"
+          className="flex w-full items-center gap-3 rounded-xl px-3 py-2 text-sm text-destructive transition-colors duration-200 hover:bg-neutral-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-400 focus-visible:ring-offset-2 focus-visible:ring-offset-neutral-900"
         >
           <LogOut className="h-4 w-4 shrink-0" aria-hidden />
           Logout

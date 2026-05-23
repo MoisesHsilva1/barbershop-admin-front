@@ -33,7 +33,7 @@ export function AppTopBar({ onOpenMobileNav }: AppTopBarProps) {
               <Scissors className="h-4 w-4" />
             </div>
             <span className="truncate text-sm font-semibold text-neutral-900">
-              Nasck Hair  
+              Nasck Hair
             </span>
           </NavLink>
         </div>
@@ -53,7 +53,7 @@ export function AppTopBar({ onOpenMobileNav }: AppTopBarProps) {
 
           <div className="flex items-center gap-3 border-l border-neutral-200 pl-3 sm:pl-4">
             <div
-              className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-primary-100 text-sm font-semibold text-primary-800"
+              className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-primary-100 text-sm font-semibold text-primary-800"
               aria-hidden
             >
               RJ
