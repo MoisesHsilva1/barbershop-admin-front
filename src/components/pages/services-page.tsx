@@ -32,12 +32,12 @@ export default function ServicesPage() {
   return (
     <PageLayout className="gap-6">
       <PageHeader
-        title="Services"
+        title="Serviços"
         belowTitle={
           <Breadcrumbs
             items={[
-              { label: 'Management' },
-              { label: 'Services' },
+              { label: 'Gestão' },
+              { label: 'Serviços' },
             ]}
           />
         }
@@ -49,7 +49,7 @@ export default function ServicesPage() {
             onClick={openCreateForm}
           >
             <Plus className="h-4 w-4" aria-hidden />
-            Create service
+            Criar Serviço
           </Button>
         }
       />

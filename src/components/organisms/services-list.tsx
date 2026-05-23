@@ -24,7 +24,7 @@ function ServicesListSkeleton() {
     <div
       className="overflow-hidden rounded-2xl border border-neutral-200 bg-white shadow-sm"
       aria-busy="true"
-      aria-label="Loading services"
+      aria-label="Carregando serviços"
     >
       <div className="border-b border-neutral-200 px-6 py-4">
         <Skeleton className="h-5 w-32" />
@@ -46,13 +46,13 @@ function ServicesSearchEmptyState({ onClearSearch }: { onClearSearch: () => void
     <div className="flex flex-col items-center gap-4 px-6 py-12 text-center">
       <Search className="h-8 w-8 text-neutral-300" aria-hidden />
       <div className="max-w-sm space-y-2">
-        <h3 className="text-lg font-medium text-neutral-900">No matching services</h3>
+        <h3 className="text-lg font-medium text-neutral-900">Nenhum serviço encontrado</h3>
         <p className="text-sm text-neutral-500">
-          Try a different search term or clear the filter to see all services.
+          Tente outro termo de busca ou limpe o filtro para ver todos os serviços.
         </p>
       </div>
       <Button type="button" variant="outline" onClick={onClearSearch}>
-        Clear search
+        Limpar busca
       </Button>
     </div>
   );
@@ -96,13 +96,13 @@ export function ServicesList({
         className="flex flex-col items-center gap-4 rounded-2xl border border-destructive/20 bg-white p-8 text-center shadow-sm"
       >
         <p className="text-sm font-medium text-destructive">
-          Unable to load services
+          Não foi possível carregar os serviços
         </p>
         <p className="max-w-sm text-sm text-neutral-500">
-          Check your connection and try again.
+          Verifique sua conexão e tente novamente.
         </p>
         <Button type="button" variant="outline" onClick={onRetry}>
-          Try again
+          Tentar novamente
         </Button>
       </div>
     );
@@ -111,11 +111,11 @@ export function ServicesList({
   if (!services?.length) {
     return (
       <EmptyState
-        title="No services yet"
-        description="Create your first service to start building your catalog."
+        title="Nenhum serviço cadastrado"
+        description="Crie seu primeiro serviço para começar a montar o catálogo."
         action={
           <Button type="button" onClick={onAddService}>
-            Create service
+            Criar serviço
           </Button>
         }
       />

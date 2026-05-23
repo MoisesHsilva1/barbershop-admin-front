@@ -18,8 +18,8 @@ interface ServicesTableToolbarProps {
 }
 
 const SORT_LABELS: Record<ServiceSortField, string> = {
-  name: 'Name',
-  price: 'Price',
+  name: 'Nome',
+  price: 'Preço',
 };
 
 export function ServicesTableToolbar({
@@ -40,7 +40,7 @@ export function ServicesTableToolbar({
       )}
     >
       <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
-        <h2 className="text-base font-semibold text-neutral-900">Services table</h2>
+        <h2 className="text-base font-semibold text-neutral-900">Lista de serviços</h2>
 
         <div className="flex flex-col gap-2 sm:flex-row sm:items-center">
           <div className="relative w-full sm:w-56 lg:w-64">
@@ -52,8 +52,8 @@ export function ServicesTableToolbar({
               type="search"
               value={search}
               onChange={(event) => onSearchChange(event.target.value)}
-              placeholder="Search"
-              aria-label="Search services"
+              placeholder="Buscar"
+              aria-label="Buscar serviços"
               className="h-9 bg-neutral-50 pl-9"
             />
           </div>
@@ -64,10 +64,10 @@ export function ServicesTableToolbar({
             size="sm"
             className="h-9 shrink-0"
             onClick={() => onSortToggle(nextSortField)}
-            aria-label={`Sort by ${SORT_LABELS[nextSortField]}, ${sortDirection === 'asc' ? 'ascending' : 'descending'}`}
+            aria-label={`Ordenar por ${SORT_LABELS[nextSortField]}, ${sortDirection === 'asc' ? 'crescente' : 'decrescente'}`}
           >
             <ArrowDownUp className="h-4 w-4" aria-hidden />
-            Sort by {SORT_LABELS[sortField]}
+            Ordenar por {SORT_LABELS[sortField]}
           </Button>
         </div>
       </div>

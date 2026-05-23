@@ -87,31 +87,31 @@ export function ServicesTable({
                 scope="col"
                 className="w-16 px-4 py-3 text-xs font-medium uppercase tracking-wide text-neutral-500 sm:px-6"
               >
-                No.
+                Nº
               </th>
               <th
                 scope="col"
                 className="px-4 py-3 text-xs font-medium uppercase tracking-wide text-neutral-500 sm:px-6"
               >
-                Service name
+                Nome do serviço
               </th>
               <th
                 scope="col"
                 className="hidden px-4 py-3 text-xs font-medium uppercase tracking-wide text-neutral-500 md:table-cell md:px-6"
               >
-                Description
+                Descrição
               </th>
               <th
                 scope="col"
                 className="px-4 py-3 text-xs font-medium uppercase tracking-wide text-neutral-500 sm:px-6"
               >
-                Price
+                Preço
               </th>
               <th
                 scope="col"
                 className="w-16 px-4 py-3 text-right text-xs font-medium uppercase tracking-wide text-neutral-500 sm:px-6"
               >
-                <span className="sr-only">Actions</span>
+                <span className="sr-only">Ações</span>
               </th>
             </tr>
           </thead>

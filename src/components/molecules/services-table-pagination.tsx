@@ -47,18 +47,18 @@ export function ServicesTablePagination({
     >
       <p className="text-sm text-neutral-500">
         {totalResults === 0
-          ? 'No results'
-          : `Showing ${showingFrom} to ${showingTo} of ${totalResults} results`}
+          ? 'Nenhum resultado'
+          : `Exibindo ${showingFrom} a ${showingTo} de ${totalResults} resultados`}
       </p>
 
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:gap-6">
         <label className="flex items-center gap-2 text-sm text-neutral-600">
-          <span>Per page</span>
+          <span>Por página</span>
           <select
             value={pageSize}
             onChange={(event) => onPageSizeChange(Number(event.target.value))}
             className="h-9 rounded-xl border border-neutral-200 bg-white px-3 text-sm text-neutral-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-            aria-label="Rows per page"
+            aria-label="Linhas por página"
           >
             {getTablePageSizeOptions().map((option) => (
               <option key={option.value} value={option.value}>
@@ -68,13 +68,13 @@ export function ServicesTablePagination({
           </select>
         </label>
 
-        <nav aria-label="Table pagination" className="flex items-center gap-1">
+        <nav aria-label="Paginação da tabela" className="flex items-center gap-1">
           <Button
             type="button"
             variant="outline"
             size="icon"
             className="h-9 w-9"
-            aria-label="Previous page"
+            aria-label="Página anterior"
             disabled={page <= 1}
             onClick={() => onPageChange(page - 1)}
           >
@@ -88,7 +88,7 @@ export function ServicesTablePagination({
               variant={pageNumber === page ? 'default' : 'outline'}
               size="icon"
               className="h-9 w-9"
-              aria-label={`Page ${pageNumber}`}
+              aria-label={`Página ${pageNumber}`}
               aria-current={pageNumber === page ? 'page' : undefined}
               onClick={() => onPageChange(pageNumber)}
             >
@@ -101,7 +101,7 @@ export function ServicesTablePagination({
             variant="outline"
             size="icon"
             className="h-9 w-9"
-            aria-label="Next page"
+            aria-label="Próxima página"
             disabled={page >= totalPages}
             onClick={() => onPageChange(page + 1)}
           >
