@@ -1,0 +1,200 @@
+# Skill: Adjust Design
+
+Goal:
+
+Adjust and improve existing UI while preserving functionality and respecting the project design system.
+
+Purpose:
+
+Improve visual consistency, hierarchy, readability, responsiveness and user experience without changing business behavior.
+
+Process:
+
+1. Analyze current UI structure
+
+- Identify hierarchy issues
+- Identify inconsistent spacing
+- Identify typography problems
+- Identify color misuse
+- Identify accessibility issues
+- Identify responsiveness problems
+
+---
+
+2. Validate design system consistency
+
+Check:
+
+- colors
+- typography
+- spacing
+- radius
+- shadows
+- component usage
+- interaction patterns
+
+---
+
+3. Apply project design rules
+
+Respect:
+
+- design-rules.mdc
+- component architecture
+- shadcn/ui patterns
+- accessibility rules
+- responsive rules
+
+---
+
+4. Improve visual hierarchy
+
+Prioritize:
+
+- important actions
+- content readability
+- user flow clarity
+- information grouping
+
+Examples:
+
+Improve:
+
+- headings
+- spacing
+- card organization
+- labels
+- actions
+- section separation
+
+---
+
+5. Improve UX behavior
+
+Review:
+
+- loading states
+- empty states
+- error states
+- hover states
+- focus states
+- disabled states
+
+Rules:
+
+- Always provide user feedback
+- Never leave blank states
+- Never hide important actions
+
+---
+
+6. Improve responsiveness
+
+Check:
+
+Mobile:
+
+- content stacking
+- spacing
+- touch targets
+
+Tablet:
+
+- layout consistency
+
+Desktop:
+
+- content distribution
+- whitespace balance
+
+Avoid:
+
+- horizontal scrolling
+- cramped layouts
+
+---
+
+7. Accessibility verification
+
+Always validate:
+
+- contrast ratio
+- keyboard navigation
+- focus visibility
+- labels
+- semantic HTML
+- ARIA when necessary
+
+---
+
+Expected Output
+
+Provide:
+
+- identified problems
+- suggested improvements
+- updated implementation
+
+---
+
+Rules
+
+Never:
+
+- change business logic
+- change API behavior
+- change state behavior
+- add random colors
+- create unnecessary components
+- introduce new libraries
+
+Always:
+
+- preserve existing functionality
+- respect design tokens
+- use existing component patterns
+- keep visual consistency
+
+---
+
+Checklist
+
+Visual:
+
+✓ hierarchy
+
+✓ spacing
+
+✓ typography
+
+✓ colors
+
+✓ shadows
+
+✓ borders
+
+✓ responsiveness
+
+UX:
+
+✓ loading
+
+✓ empty states
+
+✓ error states
+
+✓ interactions
+
+Accessibility:
+
+✓ keyboard support
+
+✓ contrast
+
+✓ semantics
+
+Performance:
+
+✓ avoid unnecessary rerenders
+
+✓ avoid unnecessary complexity

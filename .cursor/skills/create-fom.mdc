@@ -1,0 +1,31 @@
+# Skill: Create Form
+
+Goal:
+
+Create forms using React Hook Form and Zod.
+
+Steps:
+
+1. Create schema
+
+2. Infer form type
+
+3. Create form
+
+4. Connect validation
+
+5. Add loading states
+
+6. Add error handling
+
+Expected output:
+
+- schema
+- component
+- types
+
+Rules:
+
+- Use React Hook Form
+- Use zodResolver
+- Reuse shared schemas

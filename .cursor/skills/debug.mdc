@@ -1,0 +1,27 @@
+# Skill: Debug
+
+Goal:
+
+Find root cause of issues.
+
+Process:
+
+1. Identify symptoms
+
+2. Locate affected layer
+
+3. Check logs
+
+4. Check state
+
+5. Check services
+
+6. Check hooks
+
+7. Propose fix
+
+Output:
+
+- root cause
+- explanation
+- correction

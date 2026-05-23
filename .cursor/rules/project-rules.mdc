@@ -1,0 +1,664 @@
+---
+description: Core project rules for React 19, TypeScript, architecture and development standards
+globs: **/*
+alwaysApply: true
+---
+
+# Project Rules
+
+Follow these rules strictly.
+
+---
+
+# Core Principles
+
+- Prefer simplicity over abstraction
+- Prefer readability over cleverness
+- Composition over inheritance
+- Single responsibility principle
+- Avoid premature optimization
+- Avoid duplication (DRY)
+- Keep code self-explanatory
+- Respect existing project patterns
+- Prioritize maintainability over short-term speed
+
+---
+
+# Tech Stack
+
+- React 19
+- React Compiler
+- TypeScript (strict mode)
+- Vite
+- TailwindCSS
+- shadcn/ui
+- React Router
+- TanStack Query
+- Zustand
+- React Hook Form
+- Zod
+- Axios
+- Lucide Icons
+
+Do not introduce alternative libraries unless explicitly requested.
+
+---
+
+# Project Structure
+
+```txt
+src/
+
+src/
+
+├── components/
+│   ├── atoms/
+│   ├── molecules/
+│   ├── organisms/
+│   ├── templates/
+│   └── pages/
+│
+├── api/
+│   └── api.ts
+│
+├── hooks/
+│
+├── services/
+│
+├── stores/
+│
+├── routes/
+│
+├── schema/
+│   ├── shared/
+│   └── forms/
+│
+├── constants/
+│   ├── options/
+│   └── enums/
+│
+├── config/
+│   └── env.ts
+│
+├── types/
+│   └── interfaces/
+│
+├── utils/
+│
+│
+├── lib/
+│
+└── assets/
+```
+
+---
+
+# Architecture Rules
+
+Use Atomic Design for UI organization.
+
+Definitions:
+
+Atoms:
+
+- Small reusable UI elements
+- Must not contain business logic
+
+Examples:
+
+- Button
+- Input
+- Icon
+- Badge
+
+Molecules:
+
+- Combination of atoms
+- Small reusable compositions
+
+Examples:
+
+- SearchInput
+- FormField
+- UserCard
+
+Organisms:
+
+- Larger composed sections
+- May integrate hooks and interactions
+
+Examples:
+
+- Sidebar
+- Header
+- LoginForm
+
+Templates:
+
+- Layout structures only
+- No business rules
+
+Pages:
+
+- Final composition
+- Connect data and UI
+
+Rules:
+
+- Business logic never belongs inside components
+- Components focus on rendering
+- Complex logic belongs in hooks
+- External communication belongs in services
+- Avoid circular dependencies
+
+---
+
+# Environment Rules
+
+Never access:
+
+```ts
+import.meta.env
+```
+
+directly outside:
+
+```txt
+config/env.ts
+```
+
+Always create:
+
+```ts
+const Environment = {
+  API_BASE_URL:
+    import.meta.env.VITE_API_BASE_URL
+};
+
+export default Environment;
+```
+
+Rules:
+
+- All environment variables must be mapped through env.ts
+- Never hardcode URLs
+- Never expose secrets
+- Validate required variables
+
+---
+
+# API Rules
+
+Location:
+
+```txt
+src/api/api.ts
+```
+
+Pattern:
+
+```ts
+import axios,{
+ type AxiosInstance
+} from 'axios';
+
+import Environment
+from '@/config/env';
+
+function getAPIClient():AxiosInstance{
+
+ return axios.create({
+
+   baseURL:
+   Environment.API_BASE_URL,
+
+   headers:{
+     'Content-Type':
+     'application/json'
+   }
+
+ });
+
+}
+
+export const api=
+getAPIClient();
+```
+
+Rules:
+
+- Never call axios directly inside components
+- Never create multiple API instances
+- All requests must use api.ts
+
+---
+
+# Service Rules
+
+Location:
+
+```txt
+src/services/
+```
+
+Rules:
+
+- Services handle external communication only
+- Services never contain UI logic
+- Services must return typed data
+- Services must use interfaces
+
+Correct:
+
+```ts
+export async function fetchItems():
+Promise<Item[]>{
+
+ const response=
+ await api.get('/items');
+
+ return response.data;
+
+}
+```
+
+Avoid:
+
+```ts
+await axios.get(...)
+```
+
+---
+
+# API Response Interfaces
+
+Location:
+
+```txt
+src/types/interfaces/
+```
+
+Reusable pattern:
+
+```ts
+export interface ApiResponse<T>{
+
+ success:boolean;
+ data:T;
+
+}
+
+export interface ApiListResponse<T>{
+
+ success:boolean;
+ limit:number;
+ offset:number;
+ total:number;
+ rows:T[];
+
+}
+```
+
+Rules:
+
+- API responses must be typed
+- Reuse generic interfaces
+- Avoid duplicate response structures
+
+---
+
+# Schema Rules
+
+Location:
+
+```txt
+src/schema/
+```
+
+Structure:
+
+```txt
+schema/
+
+├── shared/
+│   ├── email-schema.ts
+│   ├── phone-schema.ts
+│   └── document-schema.ts
+│
+└── forms/
+    ├── login-form-schema.ts
+    └── profile-form-schema.ts
+```
+
+Rules:
+
+Shared schemas:
+
+- Single reusable field validation
+- Reused across forms
+
+Form schemas:
+
+- Complete form validation
+- Compose shared schemas
+
+Naming:
+
+Shared:
+
+```txt
+email-schema.ts
+phone-schema.ts
+```
+
+Forms:
+
+```txt
+login-form-schema.ts
+profile-form-schema.ts
+```
+
+Avoid:
+
+```txt
+schema.ts
+validation.ts
+newSchema.ts
+```
+
+---
+
+# Zod Rules
+
+Use Zod for all external validation.
+
+Pattern:
+
+```ts
+import {z}
+from 'zod';
+
+export const userSchema=
+z.object({
+
+ name:z.string(),
+ email:z.string()
+
+});
+
+export type UserValues=
+z.infer<
+ typeof userSchema
+>;
+```
+
+Rules:
+
+- Infer types from schemas
+- Avoid duplicated interfaces
+- Reuse shared schemas
+
+---
+
+# Hook Rules
+
+Location:
+
+```txt
+src/hooks/
+```
+
+Rules:
+
+- Hooks encapsulate behavior
+- Hooks never render UI
+- Hooks use services
+- Hooks contain query logic
+
+Correct:
+
+```ts
+export function useItems(){
+
+ return useQuery({
+
+   queryKey:['items'],
+
+   queryFn:fetchItems
+
+ });
+
+}
+```
+
+Avoid:
+
+```tsx
+const response=
+await api.get(...)
+```
+
+inside components
+
+---
+
+# TanStack Query Rules
+
+Rules:
+
+- Query keys must be arrays
+- Use hierarchical keys
+- Use invalidation after mutations
+- Handle loading states
+- Handle error states
+- Use optimistic updates when necessary
+
+Correct:
+
+```ts
+['users']
+['users',id]
+['users',params]
+```
+
+---
+
+# React Compiler Rules
+
+React Compiler enabled.
+
+Rules:
+
+- Trust React Compiler
+- Avoid unnecessary useMemo
+- Avoid unnecessary useCallback
+- Avoid premature optimization
+- Memoize only after profiling
+
+Avoid:
+
+```tsx
+const value=
+useMemo(
+ ()=>calculate(),
+ []
+)
+```
+
+unless profiling proves necessity
+
+---
+
+# Code Style
+
+Rules:
+
+- kebab-case file names
+- single quotes
+- 2-space indentation
+- prefer const
+- optional chaining
+- nullish coalescing
+- named exports for utilities
+- default export for pages
+
+---
+
+# Response Style
+
+When generating code:
+
+- Generate complete code
+- Follow project conventions
+- Avoid unnecessary explanations
+- Avoid comments unless requested
+- Prioritize maintainability
+
+---
+
+# Static Data Rules
+
+Location:
+
+```txt
+src/
+
+├── constants/
+│
+│   ├── options/
+│   │   ├── status-options.ts
+│   │   ├── category-options.ts
+│   │   ├── role-options.ts
+│   │   └── filter-options.ts
+│
+│   └── enums/
+```
+
+Purpose:
+
+Centralize reusable static application data.
+
+Examples:
+
+- status
+- categories
+- filters
+- roles
+- document types
+- select values
+- dropdown values
+- radio values
+
+Rules:
+
+- Never hardcode select options inside components
+
+- Never create inline mock lists inside JSX
+- Never duplicate static lists across files
+- Static data must live in constants
+- Prefer typed constant arrays over TypeScript enums
+- Create helper functions when necessary
+- Keep labels and values separated
+- Allow metadata expansion
+
+---
+
+Preferred:
+
+```ts
+export const STATUS_OPTIONS = [
+  {
+    label: 'Active',
+    value: 'active'
+  },
+  {
+    label: 'Inactive',
+    value: 'inactive'
+  }
+] as const;
+
+export function getStatusOptions() {
+  return STATUS_OPTIONS;
+}
+```
+
+Use:
+
+```tsx
+<Select
+  options={getStatusOptions()}
+/>
+```
+
+---
+
+Acceptable enum usage:
+
+Only use enums for fixed internal application values:
+
+```ts
+export enum UserRole {
+  ADMIN='ADMIN',
+  USER='USER'
+}
+```
+
+Examples:
+
+- permissions
+- roles
+- internal application states
+
+Do not use enums for UI option rendering.
+
+---
+
+Avoid:
+
+Inline arrays:
+
+```tsx
+<Select
+ options={[
+   {
+     label:'Admin',
+     value:'admin'
+   },
+   {
+     label:'User',
+     value:'user'
+   }
+ ]}
+/>
+```
+
+Avoid:
+
+```tsx
+const categories=[
+ 'Technology',
+ 'Health',
+ 'Sports'
+]
+```
+
+inside components.
+
+---
+
+Dynamic data rules
+
+Dynamic data from APIs:
+
+- Must stay in services
+- Must stay in hooks
+- Must use TanStack Query
+
+Examples:
+
+- users
+- products
+- cities
+- notifications
+
+Dynamic data must never become constants.

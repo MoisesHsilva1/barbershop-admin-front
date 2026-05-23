@@ -1,0 +1,26 @@
+# Skill: Create Hook
+
+Goal:
+
+Encapsulate reusable behavior.
+
+Steps:
+
+1. Identify logic to extract
+
+2. Create hook interface
+
+3. Move logic from component
+
+4. Handle loading/error states
+
+Expected output:
+
+- hook implementation
+- exported types
+
+Rules:
+
+- Prefix with use
+- No UI rendering
+- Hooks consume services

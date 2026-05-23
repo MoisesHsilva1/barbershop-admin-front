@@ -1,0 +1,60 @@
+---
+description: State management standards
+globs: src/**/*
+alwaysApply: true
+---
+
+# State Rules
+
+Local state:
+
+- useState
+- useReducer
+
+Global state:
+
+- Zustand
+
+Server state:
+
+- TanStack Query
+
+Schemas forms:
+- Zod
+
+Forms:
+
+- React Hook Form
+
+URL state:
+
+- React Router
+
+Avoid:
+
+- Server data inside Zustand
+- Excessive global state
+
+---
+
+## Zustand
+
+Rules:
+
+- Store by domain
+- Use selectors
+- Use slices
+- Persist only when needed
+- Use immer for complex updates
+
+Bad:
+
+authStore
+cartStore
+userStore
+everythingStore
+
+Good:
+
+auth-store
+user-store

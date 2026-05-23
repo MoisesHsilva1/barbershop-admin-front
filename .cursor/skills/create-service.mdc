@@ -1,0 +1,26 @@
+# Skill: Create Service
+
+Goal:
+
+Create service responsible for external communication.
+
+Steps:
+
+1. Identify endpoint
+
+2. Define request types
+
+3. Define response interfaces
+
+4. Implement service methods
+
+Expected output:
+
+- service file
+- typed methods
+
+Rules:
+
+- Use api.ts only
+- Never call axios directly
+- Return typed responses

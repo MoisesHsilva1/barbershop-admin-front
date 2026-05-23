@@ -1,0 +1,55 @@
+---
+description: Frontend development standards
+globs: src/**/*.tsx
+alwaysApply: true
+---
+
+# Frontend Rules
+
+## Components
+
+Use:
+
+- Functional components
+- Hooks
+- Composition
+- Custom hooks
+- Suspense
+- Error boundaries
+
+Avoid:
+
+- Class components
+- Prop drilling
+- Massive components
+- Mixed responsibilities
+
+Rules:
+
+- Components ≤ 200 lines
+- Move logic to hooks
+- Keep render clean
+- One responsibility per component
+
+---
+
+## Hooks
+
+Rules:
+
+- Prefix with use
+- Keep focused
+- Avoid side effects in render
+- Extract reusable logic
+
+Correct:
+
+```tsx
+const {users}=useUsers()
+```
+
+Avoid:
+
+```tsx
+const users=api.get()
+```

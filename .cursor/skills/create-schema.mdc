@@ -1,0 +1,34 @@
+# Skill: Create Schema
+
+Goal:
+
+Create validation schemas using Zod.
+
+Steps:
+
+1. Identify reusable fields
+
+2. Create shared schema if reusable
+
+3. Create form schema if needed
+
+4. Infer types
+
+Expected output:
+
+- schema file
+- inferred types
+
+Rules:
+
+Shared:
+
+shared/email-schema.ts
+
+Forms:
+
+forms/login-form-schema.ts
+
+Use:
+
+z.infer<typeof schema>

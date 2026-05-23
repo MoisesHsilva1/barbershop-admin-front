@@ -1,0 +1,45 @@
+# Skill: Create Feature
+
+Goal:
+
+Create a complete feature following project architecture and rules.
+
+Steps:
+
+1. Understand requirements
+
+2. Identify entities and data structures
+
+3. Create required schemas
+
+4. Create service layer
+
+5. Create hooks
+
+6. Create UI structure
+
+7. Create state if necessary
+
+8. Create loading and error states
+
+9. Create tests
+
+10. Validate architecture consistency
+
+Expected output:
+
+- components
+- services
+- hooks
+- schemas
+- interfaces
+- tests
+- route integration
+
+Rules:
+
+- Follow Atomic Design
+- Keep business logic outside UI
+- Use TypeScript strict
+- Use TanStack Query for server state
+- Use Zustand only when global state is required

@@ -1,0 +1,32 @@
+# Skill: Create Component
+
+Goal:
+
+Create reusable UI components.
+
+Steps:
+
+1. Identify component responsibility
+
+2. Determine Atomic Design level
+
+3. Define props interface
+
+4. Implement component
+
+5. Add accessibility support
+
+6. Add loading/error states if needed
+
+Expected output:
+
+- component file
+- props interface
+- variants when needed
+
+Rules:
+
+- Keep component under ~200 lines
+- No business logic
+- No API calls
+- Use composition

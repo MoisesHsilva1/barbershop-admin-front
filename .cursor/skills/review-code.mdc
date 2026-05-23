@@ -1,0 +1,39 @@
+# Skill: Review Code
+
+Goal:
+
+Review implementation quality.
+
+Checklist:
+
+Architecture:
+
+- follows project rules
+- correct folder structure
+
+Code:
+
+- readable
+- reusable
+- maintainable
+
+React:
+
+- hooks usage
+- unnecessary renders
+- state organization
+
+TypeScript:
+
+- no any
+- proper typing
+
+Performance:
+
+- unnecessary effects
+- unnecessary memoization
+
+Security:
+
+- input validation
+- sensitive data exposure
